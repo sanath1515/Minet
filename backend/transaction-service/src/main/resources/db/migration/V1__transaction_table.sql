@@ -1,0 +1,13 @@
+--CREATE TABLE transaction (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    transaction_type VARCHAR(20),
+--    transaction_date DATE,
+--    currency_name VARCHAR(255),
+--    currency_symbol VARCHAR(10),
+--    currency_quantity DECIMAL(10, 6),
+--    amount DECIMAL(10, 2),
+--    user_id INT,
+--    FOREIGN KEY (user_id) REFERENCES user(id),
+--    crypto_currency_id INT,
+--    FOREIGN KEY (crypto_currency_id) REFERENCES crypto_currency(id)
+--);

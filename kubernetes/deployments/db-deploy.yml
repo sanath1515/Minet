@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+spec:
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      containers:
+      - name: database
+        image: mysql:8.0
+        envFrom:
+          - secretRef:
+              name: db-pass
+        args:
+          - "--max_connections=5000"
+        volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: db-persist
+          - mountPath: /docker-entrypoint-initdb.d
+            name: bc136-db
+        ports:
+        - containerPort: 3306
+        resources: {}
+
+      volumes:
+        - name: bc136-db
+          configMap:
+            name: bc136-db
+        - name: db-persist
+          persistentVolumeClaim:
+            claimName: db-persist
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: tier
+                    operator: In
+                    values:
+                      - frontend

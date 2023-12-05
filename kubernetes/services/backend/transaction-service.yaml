@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bc-136-transaction-service
+spec:
+  selector:
+    tier: backend
+    app: bc-136-transaction-service-deploy
+  ports:
+  - port: 9003
+    targetPort: 9003

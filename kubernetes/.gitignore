@@ -1,0 +1,4 @@
+secrets/
+configmaps/
+docker-compose.yml
+.env.backend

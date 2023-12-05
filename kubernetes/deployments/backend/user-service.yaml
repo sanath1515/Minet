@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bc-136-user-service
+spec:
+  selector:
+    matchLabels:
+      app: bc-136-user-service-deploy
+      tier: backend
+  template:
+    metadata:
+      labels:
+        tier: backend
+        app: bc-136-user-service-deploy
+    spec:
+      containers:
+      - name: bc-136-user-service
+        image: ghcr.io/saketh-macharla/bc-136-user-service:1
+        ports:
+        - containerPort: 9008
+        env:
+          - name: eureka.instance.hostname
+            value: bc-136-user-service
+
+          - name: spring.datasource.password
+            valueFrom:
+              secretKeyRef:
+                name: db-pass
+                key: MYSQL_ROOT_PASSWORD
+
+        resources: {}
+        envFrom:
+          - configMapRef:
+              name: backend-eureka
+      imagePullSecrets:
+        - name: ghcr-secret

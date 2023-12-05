@@ -1,0 +1,33 @@
+server:
+  port: 9003
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone:
+        http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+
+spring:
+  application:
+    name:
+      TRANSACTION-SERVICE
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://3.135.247.109:30002/minet
+    username: root
+    password: Bootcamp@136
+    hikari:
+      maximum-pool-size: 10
+  flyway:
+    baselineOnMigrate: true
+    locations: classpath:db/migration
+    validate-on-migrate: false
+    encoding: UTF-8
+    out-of-order: true
+    url: jdbc:mysql://3.135.247.109:30002/minet
+    user: root
+    password: Bootcamp@136

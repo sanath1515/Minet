@@ -1,0 +1,63 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-resource
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: bc136ms.bootcamp64.tk
+      http: 
+        paths:
+          - backend:
+              service:
+                name: mock-server-service
+                port:
+                  number: 4000
+            pathType: Prefix
+            path: /
+
+    - host: bc136fe.bootcamp64.tk
+      http: 
+        paths:
+          - backend:
+              service:
+                name: bc136-fe-service
+                port:
+                  number: 3000
+            pathType: Prefix
+            path: /
+
+    - host: bc136be.bootcamp64.tk
+      http: 
+        paths:
+          - backend:
+              service:
+                name: bc-136-service-registry-service
+                port:
+                  number: 8761
+            pathType: Exact
+            path: /$
+
+    - host: bc136be.bootcamp64.tk
+      http: 
+        paths:
+          - backend:
+              service:
+                name: bc-136-service-registry-service
+                port:
+                  number: 8761
+            pathType: Prefix
+            path: /eureka
+
+    - host: bc136be.bootcamp64.tk
+      http: 
+        paths:
+          - backend:
+              service:
+                name: bc-136-api-gateway-service
+                port:
+                  number: 9191
+            pathType: Prefix
+            path: /

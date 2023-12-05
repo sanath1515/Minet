@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bc-136-service-registry
+spec:
+  selector:
+    matchLabels:
+      app: bc-136-service-registry
+      tier: backend
+  template:
+    metadata:
+      labels:
+        tier: backend
+        app: bc-136-service-registry
+    spec:
+      containers:
+      - name: bc-136-service-registry
+        image: ghcr.io/saketh-macharla/bc-136-service-registry:1
+        ports:
+        - containerPort: 8761
+        env:
+        - name: eureka.instance.hostname
+          value: bc-136-service-registry-service
+        resources: {}
+      imagePullSecrets:
+        - name: ghcr-secret

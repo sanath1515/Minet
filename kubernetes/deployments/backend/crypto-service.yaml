@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bc-136-cryptocurrency-service
+spec:
+  selector:
+    matchLabels:
+      app: bc-136-cryptocurrency-service-deploy
+      tier: backend
+  template:
+    metadata:
+      labels:
+        tier: backend
+        app: bc-136-cryptocurrency-service-deploy
+    spec:
+      containers:
+      - name: bc-136-cryptocurrency-service
+        image: ghcr.io/saketh-macharla/bc-136-cryptocurrency-service:1
+        ports:
+        - containerPort: 9002
+        env:
+          - name: eureka.instance.hostname
+            value: bc-136-cryptocurrency
+          - name: spring.datasource.password
+            valueFrom:
+              secretKeyRef:
+                name: db-pass
+                key: MYSQL_ROOT_PASSWORD
+        envFrom:
+          - configMapRef:
+              name: backend-eureka
+      imagePullSecrets:
+        - name: ghcr-secret

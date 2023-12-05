@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mock-server-deployment
+  labels:
+    app: bc-136
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mock-server-pod
+  template:
+    metadata:
+      name: mock-server-pod
+      labels:
+        name: mock-server-pod
+        app: bc-136
+    spec:
+      containers:
+      - name: mock-server-container
+        image: ghcr.io/saketh-macharla/bc-136-mock-server:latest
+        ports:
+        - containerPort: 4000
+        imagePullPolicy: Always
+        resources: {}
+      imagePullSecrets:
+        - name: ghcr-secret
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: tier
+                    operator: In
+                    values:
+                      - frontend

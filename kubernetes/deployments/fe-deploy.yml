@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bc136-fe-deployment
+  labels:
+    app: bc-136
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: bc136-fe-pod
+      app: bc136
+  template:
+    metadata:
+      name: bc136-fe-pod
+      labels:
+        name: bc136-fe-pod
+        app: bc136
+    spec:
+      containers:
+      - name: bc136-fe-container
+        image: ghcr.io/saketh-macharla/bc-136-fe:latest
+        resources: {}
+        ports:
+              - containerPort: 3000
+      imagePullSecrets:
+        - name: ghcr-secret
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: tier
+                    operator: In
+                    values:
+                      - frontend

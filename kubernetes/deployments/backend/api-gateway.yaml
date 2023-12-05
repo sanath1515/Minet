@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bc-136-api-gateway
+spec:
+  selector:
+    matchLabels:
+      app: bc-136-api-gateway
+      tier: backend
+  template:
+    metadata:
+      labels:
+        tier: backend
+        app: bc-136-api-gateway
+    spec:
+      containers:
+      - name: bc-136-api-gateway
+        image: ghcr.io/saketh-macharla/bc-136-api-gateway:1
+        ports:
+        - containerPort: 9191
+        env:
+          - name: eureka.instance.hostname
+            value: bc-136-api-gateway-service
+
+        resources: {}
+        envFrom:
+          - configMapRef:
+              name: backend-eureka
+      imagePullSecrets:
+        - name: ghcr-secret

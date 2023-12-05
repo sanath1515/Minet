@@ -1,0 +1,12 @@
+FROM node:16-alpine
+
+COPY db.json .
+
+RUN npm install -g json-server
+
+# RUN pwd
+
+# RUN ls
+EXPOSE 4000
+#port 6000 is a restricted port
+CMD ["json-server", "--watch", "db.json","--port", "4000", "--host", "0.0.0.0"]

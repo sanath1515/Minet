@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: bc136-fe-service
+  labels:
+    name: bc136-fe-service
+    app: bc-136
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+      name: bc136-fe-pod
+      app: bc136

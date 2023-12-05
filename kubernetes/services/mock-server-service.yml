@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mock-server-service
+  labels:
+    app: bc-136
+spec:
+  ports:
+    - targetPort: 4000
+      port: 4000
+  selector:
+    name: mock-server-pod
+    app: bc-136

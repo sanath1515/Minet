@@ -1,0 +1,13 @@
+--CREATE TABLE user (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    name VARCHAR(255),
+--    email VARCHAR(255) UNIQUE,
+--    password VARCHAR(255)
+--);
+--
+--CREATE TABLE wallet (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    balance DECIMAL(10,2),
+--    user_id INT UNIQUE,
+--    FOREIGN KEY (user_id) REFERENCES user(id)
+--);

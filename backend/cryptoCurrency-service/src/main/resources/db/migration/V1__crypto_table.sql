@@ -1,0 +1,10 @@
+--CREATE TABLE crypto_currency (
+--    id INT PRIMARY KEY AUTO_INCREMENT,
+--    name VARCHAR(255),
+--    symbol VARCHAR(10),
+--    value DECIMAL(10, 2),
+--    market_change DECIMAL(5, 2),
+--    market_cap DECIMAL(10, 2),
+--    volume DECIMAL(10, 2),
+--    circulating_supply DECIMAL(10, 2)
+--);
